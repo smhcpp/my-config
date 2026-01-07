@@ -1,0 +1,22 @@
+theme = "dracula"
+
+[keys.insert]
+j = {k = "normal_mode"}
+
+[keys.normal.space]
+w = ":w"
+q = ":q!"
+e = "file_explorer_in_current_buffer_directory"
+E = "file_explorer"
+
+[keys.normal]
+L = ["delete_selection", "paste_after"]
+H = ["delete_selection", "move_char_left", "paste_before"]
+J = ["extend_to_line_bounds", "delete_selection", "paste_after"]
+K = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
+
+[keys.select]
+L = ["delete_selection", "paste_after"]
+H = ["delete_selection", "move_char_left", "paste_before"]
+J = ["extend_to_line_bounds", "delete_selection", "paste_after"]
+K = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
