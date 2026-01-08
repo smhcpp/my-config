@@ -29,7 +29,14 @@ in
   boot.extraModprobeConfig = ''
     options 8821cu rtw_dfs_region_domain=3 rtw_country_code=FR rtw_switch_usb_mode=1 rtw_power_mgnt=0
   '';
-
+  # Garbage Collection
+  boot.loader.systemd-boot.configurationLimit = 3;
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d"; # Deletes anything older than a week
+  };
+  nix.settings.auto-optimise-store = true;
   # --- Localization ---
   time.timeZone = "Europe/Paris";
   i18n.defaultLocale = "en_US.UTF-8";

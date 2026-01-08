@@ -12,6 +12,7 @@
     tmux
     yazi
     alacritty
+    foot
     unzip
     wl-clipboard
 
