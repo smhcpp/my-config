@@ -10,6 +10,7 @@ in
   imports =
     [ # This line is CRITICAL. It points to your partition info.
       ./hardware-configuration.nix
+      ./syspkgs.nix
     ];
   nixpkgs.overlays = [ neovim-nightly-overlay ];
 
@@ -90,57 +91,6 @@ in
       config.common.default = "gtk";
     };
   # --- Packages ---
-  environment.systemPackages = with pkgs; [
-    # Neovim 0.12 Nightly
-    neovim 
-    github-desktop
-    wl-clipboard 
-    obs-studio
-    xdg-desktop-portal-gnome
-    # --- Programming ---
-    zig
-    zls
-    rustc
-    cargo
-    rust-analyzer
-    clippy # Recommended since your config uses clippy for checkOnSave
-    wgsl-analyzer
-    lua-language-server
-    gcc
-    clang
-    gnumake
-    pkg-config
-    gtk4
-    gtk4-layer-shell
-    libadwaita
-    nil
-    nixpkgs-fmt
-    helix
-    zellij
-    # Browsers
-    (vivaldi.override {
-      proprietaryCodecs = true;
-      enableWidevine = true;
-      commandLineArgs = "--ozone-platform-hint=auto --force-dark-mode --enable-features=WebUIDarkMode";
-    })
-    (brave.override {
-      commandLineArgs = "--ozone-platform-hint=auto --force-dark-mode";
-    })
-    firefox
-
-    # Niri & Wayland tools
-    alacritty
-    waybar
-    fuzzel
-    xwayland-satellite
-    qt6.qtwayland
-    wl-clipboard
-
-    # Development & System
-    git
-    unzip
-    vim
-  ];
-
+  environment.systemPackages = [];
   system.stateVersion = "25.11"; 
 }
