@@ -19,6 +19,20 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  # Kanata Settings
+  boot.kernelModules = [ "uinput" ];
+  services.udev.extraRules = ''
+    KERNEL=="uinput", GROUP="input", MODE="0660", OPTIONS+="static_node=uinput"
+  '';
+  services.kanata = {
+    enable = true;
+    keyboards.main-keyboard = {
+      devices = [
+        "/dev/input/by-path/pci-0000:01:00.0-usb-0:10:1.0-event-kbd"
+      ];
+      configFile = /home/mortimertz/.config/kanata/config.kbd;
+    };
+  };
   # --- Networking & Wi-Fi ---
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
@@ -56,10 +70,6 @@ in
   programs.niri.enable = true;
   programs.xwayland.enable = true;
   programs.fish.enable = true;
-  services.xserver.xkb = {
-    layout = "us";
-    options = "caps:super"; # The swap is here!
-  };
 
   # --- Dark Theme & Environment ---
   nixpkgs.config.allowUnfree = true;

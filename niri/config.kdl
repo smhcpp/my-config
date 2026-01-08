@@ -291,19 +291,13 @@ window-rule {
     default-column-width {}
 }
 
-// Open the Firefox picture-in-picture player as floating by default.
+prefer-no-csd// Open the Firefox picture-in-picture player as floating by default.
 window-rule {
     // This app-id regular expression will work for both:
     // - host Firefox (app-id is "firefox")
     // - Flatpak Firefox (app-id is "org.mozilla.firefox")
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     open-floating true
-
-    // This tells the app NOT to draw its title bar/decorations
-    // draw-border-with-bar false
-    
-    // For many Wayland apps (GTK/Adwaita), this is the main toggle:
-    // client-side-decorations "disable"
 }
 
 // Example: block out two password managers from screen capture.

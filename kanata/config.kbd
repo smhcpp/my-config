@@ -1,0 +1,18 @@
+(defsrc
+  caps lmet h j k l
+)
+
+(defalias
+  ;; Tap for Esc, Hold for Nav (works everywhere)
+  cap (tap-hold 200 200 esc (layer-toggle nav-layer))
+)
+
+(deflayer base
+  @cap lmet h j k l
+)
+
+(deflayer nav-layer
+  ;; Use '_' to keep Caps behavior (Esc/Nav) and Super behavior 
+  ;; consistent even while this layer is active.
+  _ _ M-h M-j M-k M-l
+)

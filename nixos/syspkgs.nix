@@ -4,6 +4,7 @@
 {
   environment.systemPackages = with pkgs; [
     # --- Terminal & Shell Utilities ---
+    kanata
     git
     vim
     neovim
