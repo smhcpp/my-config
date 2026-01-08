@@ -92,7 +92,7 @@ in
   users.users.mortimertz = {
     isNormalUser = true;
     description = "Mortimertz";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "input" "uinput" "audio" "video"];
     shell = pkgs.fish;  
   };
   services.dbus.enable = true;

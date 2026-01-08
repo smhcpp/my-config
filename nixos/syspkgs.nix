@@ -16,9 +16,10 @@
     foot
     unzip
     wl-clipboard
-
+    wireplumber 
+    playerctl
     # --- Graphical Applications (Browsers) ---
-    firefox
+    qutebrowser
     (vivaldi.override {
       proprietaryCodecs = true;
       enableWidevine = true;
