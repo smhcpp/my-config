@@ -7,8 +7,8 @@
     kanata
     git
     vim
-    helix
-    tmux
+    neovim
+    zellij
     taplo
     yazi
     alacritty

@@ -1,8 +1,8 @@
 theme = "dracula"
 
 [keys.insert]
-C-i = "normal_mode"
-"j"={"k"="normal_mode"}
+j={k="normal_mode"}
+
 
 [keys.normal.space]
 w = ":w"
@@ -11,6 +11,7 @@ e = "file_explorer_in_current_buffer_directory"
 E = "file_explorer"
 "[" = ":config-reload"
 "]" = ":config-open"
+t = { j = ":sh tmux split-window -v -l 30%% -c \"#{pane_current_path}\"", l = ":sh tmux split-window -h -c \"#{pane_current_path}\"" }
 
 [keys.normal]
 L = ["delete_selection", "paste_after"]
@@ -18,20 +19,16 @@ H = ["delete_selection", "move_char_left", "paste_before"]
 J = ["extend_to_line_bounds", "delete_selection", "paste_after"]
 K = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
 ret = ["open_below", "normal_mode"]
-C-k = "page_cursor_half_up"
-C-j = "page_cursor_half_down"
 
 [keys.select]
 L = ["delete_selection", "paste_after"]
 H = ["delete_selection","move_char_left", "paste_before"]
 J = ["extend_to_line_bounds", "delete_selection", "paste_after"]
 K = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
-C-i = "normal_mode"
-C-k = "page_cursor_half_up"
-C-j = "page_cursor_half_down"
+j={k="normal_mode"}
 
 [editor]
 idle-timeout = 200        
 completion-timeout = 100  
-bufferline = "always"     
 auto-format = true
+bufferline = "never"
