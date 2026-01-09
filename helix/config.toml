@@ -1,22 +1,37 @@
 theme = "dracula"
 
 [keys.insert]
-j = {k = "normal_mode"}
+C-i = "normal_mode"
+"j"={"k"="normal_mode"}
 
 [keys.normal.space]
 w = ":w"
 q = ":q!"
 e = "file_explorer_in_current_buffer_directory"
 E = "file_explorer"
+"[" = ":config-reload"
+"]" = ":config-open"
 
 [keys.normal]
 L = ["delete_selection", "paste_after"]
 H = ["delete_selection", "move_char_left", "paste_before"]
 J = ["extend_to_line_bounds", "delete_selection", "paste_after"]
 K = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
+ret = ["open_below", "normal_mode"]
+C-k = "page_cursor_half_up"
+C-j = "page_cursor_half_down"
 
 [keys.select]
 L = ["delete_selection", "paste_after"]
-H = ["delete_selection", "move_char_left", "paste_before"]
+H = ["delete_selection","move_char_left", "paste_before"]
 J = ["extend_to_line_bounds", "delete_selection", "paste_after"]
 K = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
+C-i = "normal_mode"
+C-k = "page_cursor_half_up"
+C-j = "page_cursor_half_down"
+
+[editor]
+idle-timeout = 200        
+completion-timeout = 100  
+bufferline = "always"     
+auto-format = true

@@ -1,10 +1,5 @@
 { config, pkgs, ... }:
 let
-  # We import the overlay and immediately call it with { } 
-  # This turns it from a "function" into a "set" Nix can use.
-  neovim-nightly-overlay = import (builtins.fetchTarball {
-    url = "https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz";
-  });
 in
 {
   imports =
@@ -12,7 +7,6 @@ in
       ./hardware-configuration.nix
       ./syspkgs.nix
     ];
-  nixpkgs.overlays = [ neovim-nightly-overlay ];
 
   # Bootloader & Kernel
   boot.loader.systemd-boot.enable = true;
@@ -109,5 +103,7 @@ in
     };
   # --- Packages ---
   environment.systemPackages = [];
+  environment.variables.EDITOR = "hx";
+  environment.variables.VISUAL = "hx";
   system.stateVersion = "25.11"; 
 }
