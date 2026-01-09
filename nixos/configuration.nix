@@ -78,7 +78,7 @@ in
 
   environment.sessionVariables = {
     GTK_THEME = "Adwaita:dark";
-    ADW_DISABLE_PORTAL = "1";
+    # ADW_DISABLE_PORTAL = "1";
     MOZ_ENABLE_WAYLAND = "1";
   };
 
@@ -97,14 +97,14 @@ in
 
 
   security.rtkit.enable = true;
-    xdg.portal = {
-      enable = true;
-      extraPortals = [ 
-        pkgs.xdg-desktop-portal-gnome
-        pkgs.xdg-desktop-portal-gtk
-      ];
-      config.common.default = "gtk";
-    };
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ 
+      pkgs.xdg-desktop-portal-gnome
+      pkgs.xdg-desktop-portal-gtk
+    ];
+    config.common.default = "gtk";
+  };
   # --- Packages ---
   environment.systemPackages = [];
   environment.variables.EDITOR = "hx";
