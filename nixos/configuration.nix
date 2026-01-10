@@ -93,18 +93,31 @@ in
     extraGroups = [ "networkmanager" "wheel" "input" "uinput" "audio" "video"];
     shell = pkgs.fish;  
   };
-  services.dbus.enable = true;
-
 
   security.rtkit.enable = true;
+  systemd.user.extraConfig = ''
+    DefaultEnvironment="WAYLAND_DISPLAY=wayland-1"
+  '';
   xdg.portal = {
     enable = true;
     extraPortals = [ 
-      pkgs.xdg-desktop-portal-gnome
       pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-gnome
     ];
-    config.common.default = "gtk";
+    config = {
+      common = {
+        default = "gtk";
+        "org.freedesktop.impl.portal.ScreenCast" = "gnome";
+        "org.freedesktop.impl.portal.Screenshot" = "gnome";
+      };
+    };
   };
+  services.dbus.enable = true;
+  systemd.user.services.xdg-desktop-portal-gtk = {
+    wantedBy = [ "xdg-desktop-portal.service" ];
+    before = [ "xdg-desktop-portal.service" ];
+  };
+
   # --- Packages ---
   environment.systemPackages = [];
   environment.variables.EDITOR = "hx";
