@@ -17,6 +17,20 @@ in
       url = "https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz";
     }))
   ];
+  # Cursor settings
+  environment.variables = {
+    XCURSOR_THEME = "Bibata-Modern-Classic";
+    XCURSOR_SIZE = "24";
+  };
+  programs.dconf.enable = true;
+
+# For GTK apps specifically
+  environment.sessionVariables = {
+    GTK_THEME = "Adwaita:dark";
+    MOZ_ENABLE_WAYLAND = "1";
+    XCURSOR_THEME = "Bibata-Modern-Classic";
+    XCURSOR_SIZE = "24";
+  };
   # Kanata Settings
   boot.kernelModules = [ "uinput" ];
   services.udev.extraRules = ''
@@ -42,7 +56,7 @@ in
     options 8821cu rtw_dfs_region_domain=3 rtw_country_code=FR rtw_switch_usb_mode=1 rtw_power_mgnt=0
   '';
   # Garbage Collection
-  boot.loader.systemd-boot.configurationLimit = 3;
+  boot.loader.systemd-boot.configurationLimit = 5;
   nix.gc = {
     automatic = true;
     dates = "weekly";
@@ -76,12 +90,6 @@ in
   qt.platformTheme = "gnome";
   qt.style = "adwaita-dark";
 
-  environment.sessionVariables = {
-    GTK_THEME = "Adwaita:dark";
-    # ADW_DISABLE_PORTAL = "1";
-    MOZ_ENABLE_WAYLAND = "1";
-  };
-
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
     nerd-fonts.jetbrains-mono
@@ -102,13 +110,13 @@ in
     enable = true;
     extraPortals = [ 
       pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-gnome
+      pkgs.xdg-desktop-portal-wlr
     ];
     config = {
       common = {
         default = "gtk";
-        "org.freedesktop.impl.portal.ScreenCast" = "gnome";
-        "org.freedesktop.impl.portal.Screenshot" = "gnome";
+        "org.freedesktop.impl.portal.ScreenCast" = "wlr";
+        "org.freedesktop.impl.portal.Screenshot" = "wlr";
       };
     };
   };
@@ -120,7 +128,7 @@ in
 
   # --- Packages ---
   environment.systemPackages = [];
-  environment.variables.EDITOR = "hx";
-  environment.variables.VISUAL = "hx";
+  environment.variables.EDITOR = "vim";
+  environment.variables.VISUAL = "nvim";
   system.stateVersion = "25.11"; 
 }

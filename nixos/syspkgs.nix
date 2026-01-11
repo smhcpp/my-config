@@ -4,12 +4,14 @@
 {
   environment.systemPackages = with pkgs; [
     # --- Terminal & Shell Utilities ---
+    libnotify
+    mako
+    bibata-cursors
     kanata
     git
     vim
     neovim
-    zellij
-    taplo
+    tmux
     yazi
     alacritty
     foot
@@ -50,6 +52,7 @@
     zig
     zls
     gcc
+    taplo
     clang
     gnumake
     pkg-config

@@ -1,4 +1,3 @@
-_G.session_path = vim.fn.stdpath("data") .. "/session.vim"
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -26,7 +25,6 @@ vim.pack.add({
   { src = 'https://github.com/hrsh7th/cmp-buffer' },
   { src = 'https://github.com/hrsh7th/cmp-path' },
   { src = 'https://github.com/L3MON4D3/LuaSnip' },
-  { src = 'https://github.com/akinsho/bufferline.nvim' },
 })
 
 vim.filetype.add({ extension = { wgsl = "wgsl" } })
@@ -88,28 +86,18 @@ cmp.setup({
   snippet = { expand = function(args) require('luasnip').lsp_expand(args.body) end },
   window = { completion = cmp.config.window.bordered(), documentation = cmp.config.window.bordered() },
   mapping = cmp.mapping.preset.insert({
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-d>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<Esc>'] = cmp.mapping.abort(),
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
     ['<Tab>'] = cmp.mapping.select_next_item(),
     ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+    ['<C-j>'] = cmp.mapping.select_next_item(), -- Add this
+    ['<C-k>'] = cmp.mapping.select_prev_item(), -- Add this
   }),
   sources = cmp.config.sources({ { name = 'nvim_lsp' }, { name = 'luasnip' } },
     { { name = 'buffer' }, { name = 'path' } })
-})
-
-require("bufferline").setup({
-  options = {
-    mode = "tabs",
-    show_buffer_icons = true,
-    show_buffer_close_icons = false,
-    show_close_icon = false,
-    indicator = { style = 'none' },
-    separator_style = "thin",
-    offsets = { { filetype = "oil", text = "File Explorer", text_align = "left", separator = true } }
-  }
 })
 
 require('fzf-lua').setup({
@@ -125,16 +113,6 @@ function H.statusline_path()
   local path = vim.fn.expand("%:p")
   if path == "" then return " [No Name] " end
   return " " .. vim.fn.fnamemodify(path, ":p:h:t") .. "/" .. vim.fn.fnamemodify(path, ":t") .. " "
-end
-
-function H.smart_tab_edit(path)
-  local bufnr = vim.api.nvim_get_current_buf()
-  local is_empty = vim.api.nvim_buf_get_offset(bufnr, vim.api.nvim_buf_line_count(bufnr)) <= 1
-  if vim.api.nvim_buf_get_name(bufnr) == "" and is_empty then
-    vim.cmd("edit " .. path)
-  else
-    vim.cmd("tabedit " .. path)
-  end
 end
 
 vim.opt.statusline = "%{v:lua.H.statusline_path()}%m %= %l:%c "
@@ -158,7 +136,7 @@ vim.opt.cursorline = true
 vim.opt.showmode = false
 vim.opt.laststatus = 3
 vim.opt.signcolumn = 'yes'
-vim.o.showtabline = 2
+vim.o.showtabline = 0
 vim.opt.redrawtime = 1500
 vim.opt.updatetime = 250
 vim.opt.lazyredraw = true
@@ -177,24 +155,26 @@ end, { noremap = true, silent = true })
 vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]])
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>q", ":q!<CR>")
+vim.keymap.set("n", "<leader>c", "gcc")
+vim.keymap.set("v", "<leader>c", "gc")
 vim.keymap.set("i", "jk", "<Esc>")
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 vim.keymap.set("t", "jk", "<C-\\><C-n>")
-vim.keymap.set("n", "<leader>gk", "<cmd>tabn<CR>")
-vim.keymap.set("n", "<leader>gj", "<cmd>tabp<CR>")
+-- vim.keymap.set("n", "<leader>gk", "<cmd>tabn<CR>")
+-- vim.keymap.set("n", "<leader>gj", "<cmd>tabp<CR>")
 vim.keymap.set("n", "vl", "V")
 vim.keymap.set("n", "vv", "v")
 vim.keymap.set("n", "vb", "<C-v>")
 vim.keymap.set("n", "va", "ggVG")
-vim.keymap.set("n", "<leader>sj", ":split | wincmd j<CR>")
-vim.keymap.set("n", "<leader>sk", ":split | wincmd k<CR>")
-vim.keymap.set("n", "<leader>sl", ":vsplit | wincmd l<CR>")
-vim.keymap.set("n", "<leader>sh", ":vsplit | wincmd h<CR>")
-vim.keymap.set("n", "<leader>zz", "<C-w>w")
-vim.keymap.set("n", "<leader>zh", "<C-w>h")
-vim.keymap.set("n", "<leader>zj", "<C-w>j")
-vim.keymap.set("n", "<leader>zk", "<C-w>k")
-vim.keymap.set("n", "<leader>zl", "<C-w>l")
+-- vim.keymap.set("n", "<leader>sj", ":split | wincmd j<CR>")
+-- vim.keymap.set("n", "<leader>sk", ":split | wincmd k<CR>")
+-- vim.keymap.set("n", "<leader>sl", ":vsplit | wincmd l<CR>")
+-- vim.keymap.set("n", "<leader>sh", ":vsplit | wincmd h<CR>")
+-- vim.keymap.set("n", "<leader>zz", "<C-w>w")
+-- vim.keymap.set("n", "<leader>zh", "<C-w>h")
+-- vim.keymap.set("n", "<leader>zj", "<C-w>j")
+-- vim.keymap.set("n", "<leader>zk", "<C-w>k")
+-- vim.keymap.set("n", "<leader>zl", "<C-w>l")
 vim.keymap.set("n", "<C-j>", "7jzz")
 vim.keymap.set("n", "<C-k>", "7kzz")
 vim.keymap.set("i", "<C-j>", "<Esc>10ji")
@@ -204,18 +184,6 @@ vim.keymap.set("n", "<BS>", "i<BS><ESC>l")
 vim.keymap.set("n", "<TAB>", "10l")
 vim.keymap.set("n", "<S-TAB>", "10h")
 
-vim.keymap.set("n", "<leader>gn", function()
-  local current_dir = vim.fn.expand("%:p:h")
-  vim.cmd("tabnew")
-  if current_dir ~= "" and vim.fn.isdirectory(current_dir) == 1 then vim.cmd("lcd " .. current_dir) end
-end)
-
-vim.keymap.set("n", "<leader>tt", function()
-  vim.cmd("lcd %:p:h")
-  vim.cmd("botright split | term fish")
-  vim.cmd("startinsert")
-end)
-
 vim.keymap.set("n", "<leader>t", function()
   vim.cmd("lcd %:p:h")
   vim.cmd("vertical botright split | term fish")
@@ -223,14 +191,31 @@ vim.keymap.set("n", "<leader>t", function()
 end)
 
 vim.keymap.set("n", "<leader>qq", function()
-  vim.cmd("mksession! " .. _G.session_path)
-  vim.cmd("qa")
+  require("auto-session").SaveSession()
+  vim.cmd("qall!")
 end)
 
-vim.keymap.set("n", "<leader>e", function() require("oil").open(vim.fn.expand("%:p:h")) end)
+vim.keymap.set("n", "<leader>sl", function()
+  require("auto-session").RestoreSession()
+end)
+
+vim.keymap.set('n', '<leader>/', function()
+  local cmd = "tmux new-window -n 'config' 'nvim " .. vim.fn.expand("$MYVIMRC") .. "'"
+  os.execute(cmd)
+end)
+
+vim.keymap.set("n", "<leader>e", function()
+  require("oil").open_float(nil, {
+    window = {
+      width = math.floor(vim.o.columns * 0.6),
+      height = math.floor(vim.o.lines * 0.6),
+      border = "rounded",
+    }
+  })
+end)
+
 vim.keymap.set('n', '<leader>ff', "<cmd>FzfLua files<CR>")
 vim.keymap.set('n', '<leader>fg', "<cmd>FzfLua live_grep<CR>")
-vim.keymap.set('n', '<leader>/', function() H.smart_tab_edit("$MYVIMRC") end)
 vim.keymap.set('n', '<leader>go', "<cmd>FzfLua lsp_document_symbols<CR>")
 vim.keymap.set("n", "J", ":m .+1<CR>==")
 vim.keymap.set("n", "K", ":m .-2<CR>== ")

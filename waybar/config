@@ -1,0 +1,47 @@
+{
+    "layer": "overlay",
+    "position": "top",
+    "height": 45,
+    "passthrough": false,
+    "exclusive": false,
+    "gtk-layer-shell": true,
+    "spacing": 8,
+    "modules-left": ["custom/keyboard"],
+    "modules-center": ["clock"],
+    "modules-right": ["network", "pulseaudio", "backlight"],
+    "custom/keyboard": {
+"exec": "niri msg keyboard-layouts | grep '*' | awk -F'[()]' '{print $2}' | cut -c1-2 | tr '[:lower:]' '[:upper:]'",
+        "interval": 1,
+        "format": "⌨  {}",
+        "on-click": "niri msg action switch-layout next" 
+    },
+    "clock": {
+        "format": "{:%H:%M   %a %d %b}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "interval": 60
+    },
+    
+    "network": {
+        "format-wifi": "  {essid}",
+        "format-ethernet": "󰈀  Connected",
+        "format-disconnected": "󰖪  Disconnected",
+        "tooltip-format": "{ifname} via {gwaddr}\nIP: {ipaddr}",
+        "on-click": "foot -e nmtui"
+    },
+    
+    "pulseaudio": {
+        "format": "{icon}  {volume}%",
+        "format-muted": "󰝟  Muted",
+        "format-icons": {
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "scroll-step": 5
+    },
+    
+    "backlight": {
+        "format": "{icon}  {percent}%",
+        "format-icons": ["󰃞", "󰃟", "󰃠"],
+        "scroll-step": 5
+    }
+}
