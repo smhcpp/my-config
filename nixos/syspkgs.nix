@@ -34,6 +34,12 @@
     gimp
     obs-studio
     github-desktop
+    mpv
+    kdePackages.okular
+    loupe
+    slurp
+    grim
+    xdg-utils
 
     # --- Desktop Environment & Wayland (Niri/Waybar) ---
     waybar
