@@ -44,17 +44,26 @@ vim.lsp.config('rust_analyzer', {
   root_markers = { "Cargo.toml", ".git" },
   settings = { ["rust-analyzer"] = { checkOnSave = true } },
 })
-vim.lsp.config('nil', {
+vim.lsp.config('nixd', {
+  cmd = { 'nixd' },
+  filetypes = { 'nix' },
+  root_markers = { 'shell.nix', 'flake.nix', '.git' },
   settings = {
-    ['nil'] = {
+    nixd = {
       formatting = {
-        command = { "nixpkgs-fmt" },
+        command = { "nixfmt" }, -- Uses nixfmt-rfc-style
       },
     },
   },
 })
+vim.lsp.config('fish_lsp', {
+  cmd = { 'fish-lsp', 'start' },
+  filetypes = { 'fish' },
+  root_markers = { '.git' },
+})
 
-vim.lsp.enable('nil')
+vim.lsp.enable('fish_lsp')
+vim.lsp.enable('nixd')
 vim.lsp.enable('rust_analyzer')
 vim.lsp.enable('wgsl_analyzer')
 vim.lsp.enable('zls')
@@ -166,15 +175,15 @@ vim.keymap.set("n", "vl", "V")
 vim.keymap.set("n", "vv", "v")
 vim.keymap.set("n", "vb", "<C-v>")
 vim.keymap.set("n", "va", "ggVG")
--- vim.keymap.set("n", "<leader>sj", ":split | wincmd j<CR>")
--- vim.keymap.set("n", "<leader>sk", ":split | wincmd k<CR>")
--- vim.keymap.set("n", "<leader>sl", ":vsplit | wincmd l<CR>")
--- vim.keymap.set("n", "<leader>sh", ":vsplit | wincmd h<CR>")
--- vim.keymap.set("n", "<leader>zz", "<C-w>w")
--- vim.keymap.set("n", "<leader>zh", "<C-w>h")
--- vim.keymap.set("n", "<leader>zj", "<C-w>j")
--- vim.keymap.set("n", "<leader>zk", "<C-w>k")
--- vim.keymap.set("n", "<leader>zl", "<C-w>l")
+vim.keymap.set("n", "<leader>sj", ":split | wincmd j<CR>")
+vim.keymap.set("n", "<leader>sk", ":split | wincmd k<CR>")
+vim.keymap.set("n", "<leader>sl", ":vsplit | wincmd l<CR>")
+vim.keymap.set("n", "<leader>sh", ":vsplit | wincmd h<CR>")
+vim.keymap.set("n", "<leader>zz", "<C-w>w")
+vim.keymap.set("n", "<leader>zh", "<C-w>h")
+vim.keymap.set("n", "<leader>zj", "<C-w>j")
+vim.keymap.set("n", "<leader>zk", "<C-w>k")
+vim.keymap.set("n", "<leader>zl", "<C-w>l")
 vim.keymap.set("n", "<C-j>", "7jzz")
 vim.keymap.set("n", "<C-k>", "7kzz")
 vim.keymap.set("i", "<C-j>", "<Esc>10ji")
@@ -221,3 +230,20 @@ vim.keymap.set("n", "J", ":m .+1<CR>==")
 vim.keymap.set("n", "K", ":m .-2<CR>== ")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.diagnostic.config({
+  float = {
+    focusable = true,
+    close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+    border = 'rounded',
+  },
+})
+vim.keymap.set('n', '<leader>h', vim.diagnostic.hide)
+vim.keymap.set('n', '<leader>s', vim.diagnostic.show)
+
+vim.diagnostic.config({
+  virtual_text = true,
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+})

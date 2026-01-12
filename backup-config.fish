@@ -6,3 +6,6 @@ cp ~/.config/fish/config.fish ~/GitHub/my-config/fish/
 cp ~/.config/kanata/* ~/GitHub/my-config/kanata/
 cp ~/.config/fuzzel/* ~/GitHub/my-config/fuzzel/
 cp ~/.config/nvim/* ~/GitHub/my-config/nvim/
+cp ~/.config/waybar/* ~/GitHub/my-config/waybar/
+cp ~/.config/tmux/tmux.conf ~/GitHub/my-config/tmux/
+cp ~/backup-config.fish ~/GitHub/my-config/

@@ -64,8 +64,9 @@
     pkg-config
 
     # --- Development: Language Servers & Formatters ---
-    nil               # Nix LSP
-    nixpkgs-fmt       # Nix Formatter
+    nixd
+    pkgs.fish-lsp
+    nixfmt-rfc-style
     lua-language-server
     wgsl-analyzer
 

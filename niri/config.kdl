@@ -10,12 +10,10 @@ input {
         tap
         natural-scroll
     }
-
-    mouse {
-    }
-
-    trackpoint {
-    }
+}
+cursor {
+    xcursor-theme "Bibata-Modern-Classic"
+    xcursor-size 24
 }
 output "DP-3" {
     mode "1920x1080@60.000"
@@ -47,37 +45,27 @@ layout {
         offset x=0 y=5
         color "#0007"
     }
-    struts {
-    }
-}
-hotkey-overlay {
 }
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
-animations {
-}
 window-rule {
     draw-border-with-background false
     geometry-corner-radius 4 
     clip-to-geometry true
 }
-
 prefer-no-csd
 window-rule {
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     open-floating true
 }
-
 /-window-rule {
     match app-id=r#"^org\.keepassxc\.KeePassXC$"#
     match app-id=r#"^org\.gnome\.World\.Secrets$"#
     block-out-from "screen-capture"
 }
-
 /-window-rule {
     geometry-corner-radius 12
     clip-to-geometry true
 }
-
 binds {
     // `niri msg action do-something`.
     // Mod-Shift-/, which is usually the same as Mod-?,

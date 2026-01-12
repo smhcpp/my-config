@@ -2,20 +2,22 @@
 let
 in
 {
-  imports =
-    [ # This line is CRITICAL. It points to your partition info.
-      ./hardware-configuration.nix
-      ./syspkgs.nix
-    ];
+  imports = [
+    # This line is CRITICAL. It points to your partition info.
+    ./hardware-configuration.nix
+    ./syspkgs.nix
+  ];
 
   # Bootloader & Kernel
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
   nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url = "https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz";
-    }))
+    (import (
+      builtins.fetchTarball {
+        url = "https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz";
+      }
+    ))
   ];
   # Cursor settings
   environment.variables = {
@@ -24,7 +26,7 @@ in
   };
   programs.dconf.enable = true;
 
-# For GTK apps specifically
+  # For GTK apps specifically
   environment.sessionVariables = {
     GTK_THEME = "Adwaita:dark";
     MOZ_ENABLE_WAYLAND = "1";
@@ -50,7 +52,7 @@ in
   networking.networkmanager.enable = true;
   networking.wireless.iwd.enable = true;
   networking.networkmanager.wifi.backend = "iwd";
-  
+
   # Your France 5GHz fixes for the driver
   boot.extraModprobeConfig = ''
     options 8821cu rtw_dfs_region_domain=3 rtw_country_code=FR rtw_switch_usb_mode=1 rtw_power_mgnt=0
@@ -98,8 +100,15 @@ in
   users.users.mortimertz = {
     isNormalUser = true;
     description = "Mortimertz";
-    extraGroups = [ "networkmanager" "wheel" "input" "uinput" "audio" "video"];
-    shell = pkgs.fish;  
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "input"
+      "uinput"
+      "audio"
+      "video"
+    ];
+    shell = pkgs.fish;
   };
 
   security.rtkit.enable = true;
@@ -108,7 +117,7 @@ in
   '';
   xdg.portal = {
     enable = true;
-    extraPortals = [ 
+    extraPortals = [
       pkgs.xdg-desktop-portal-gtk
       pkgs.xdg-desktop-portal-wlr
     ];
@@ -127,8 +136,8 @@ in
   };
 
   # --- Packages ---
-  environment.systemPackages = [];
-  environment.variables.EDITOR = "vim";
+  environment.systemPackages = [ ];
+  environment.variables.EDITOR = "nvim";
   environment.variables.VISUAL = "nvim";
-  system.stateVersion = "25.11"; 
+  system.stateVersion = "25.11";
 }
