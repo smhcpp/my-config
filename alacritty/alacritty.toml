@@ -1,0 +1,10 @@
+[font]
+normal = { family = "Jetbrains Mono Nerd Font", style = "Regular" }
+size = 16.0
+
+[window]
+option_as_alt = "Both"
+
+[terminal.shell]
+program = "fish"
+args = ["--no-config", "-i"]

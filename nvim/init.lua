@@ -42,7 +42,6 @@ vim.lsp.config('rust_analyzer', {
   cmd = { "rust-analyzer" },
   filetypes = { "rust" },
   root_markers = { "Cargo.toml", ".git" },
-  settings = { ["rust-analyzer"] = { checkOnSave = true } },
 })
 vim.lsp.config('nixd', {
   cmd = { 'nixd' },
@@ -156,9 +155,7 @@ vim.o.winborder = "rounded"
 vim.keymap.set("n", "<leader>w", ":w<CR>", { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>r", function()
-  local view = vim.fn.winsaveview()
   vim.lsp.buf.format({ async = false })
-  vim.fn.winrestview(view)
 end, { noremap = true, silent = true })
 
 vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]])

@@ -51,13 +51,12 @@
     qt6.qtwayland
     xdg-desktop-portal-gnome
 
-    # --- Development: Rust ---
+    # --- Development: Zig , Rust , Nix ---
     rustc
     cargo
     rust-analyzer
+    rustfmt
     clippy
-
-    # --- Development: Zig & C/C++ ---
     zig
     zls
     fish-lsp
