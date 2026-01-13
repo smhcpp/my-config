@@ -9,15 +9,16 @@
     bibata-cursors
     kanata
     git
-    vim
     neovim
     tmux
     yazi
     alacritty
+    gsettings-desktop-schemas
+    glib
     foot
     unzip
     wl-clipboard
-    wireplumber 
+    wireplumber
     playerctl
     # --- Graphical Applications (Browsers) ---
     qutebrowser
@@ -37,11 +38,12 @@
     mpv
     kdePackages.okular
     loupe
+
+    # --- Desktop Environment & Wayland (Niri/Waybar) ---
     slurp
     grim
     xdg-utils
-
-    # --- Desktop Environment & Wayland (Niri/Waybar) ---
+    swaybg
     waybar
     fuzzel
     xwayland-satellite
@@ -57,6 +59,7 @@
     # --- Development: Zig & C/C++ ---
     zig
     zls
+    fish-lsp
     gcc
     taplo
     clang
@@ -65,7 +68,6 @@
 
     # --- Development: Language Servers & Formatters ---
     nixd
-    pkgs.fish-lsp
     nixfmt-rfc-style
     lua-language-server
     wgsl-analyzer

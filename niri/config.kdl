@@ -1,3 +1,4 @@
+spawn-at-startup "swaybg" "-i" "/home/mortimertz/Photos/wallpapers/1.jpg" "-m" "fill"
 input {
     keyboard {
         xkb {
@@ -62,6 +63,7 @@ window-rule {
     match app-id=r#"^org\.gnome\.World\.Secrets$"#
     block-out-from "screen-capture"
 }
+// spawn-at-startup "swaybg -i /home/mortimertz/Photos/wallpapers/1.jpg"
 /-window-rule {
     geometry-corner-radius 12
     clip-to-geometry true
@@ -88,7 +90,7 @@ binds {
     XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
     Mod+O repeat=false { toggle-overview; }
-    Mod+U { spawn "~/.config/niri/overview.fish"; }
+    Mod+U { spawn "~/.config/niri/toggle-bar.fish"; }
     Mod+Q repeat=false { close-window; }
     Mod+Left  { focus-column-left; }
     Mod+Down  { focus-window-down; }

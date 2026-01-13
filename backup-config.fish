@@ -9,3 +9,4 @@ cp ~/.config/nvim/* ~/GitHub/my-config/nvim/
 cp ~/.config/waybar/* ~/GitHub/my-config/waybar/
 cp ~/.config/tmux/tmux.conf ~/GitHub/my-config/tmux/
 cp ~/backup-config.fish ~/GitHub/my-config/
+#cp ~/.config/helix/* ~/GitHub/my-config/helix/

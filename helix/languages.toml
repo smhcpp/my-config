@@ -1,0 +1,43 @@
+
+[language-server.nixd]
+command = "nixd"
+
+[language-server.zls]
+command = "zls"
+
+[language-server.rust-analyzer]
+command = "rust-analyzer"
+
+[language-server.taplo]
+command = "taplo"
+args = ["lsp", "stdio"]
+
+[language-server.nu-lsp]
+command = "nu"
+args = ["--lsp"]
+
+[[language]]
+name = "nix"
+language-servers = [ "nixd" ]
+auto-format = true
+formatter = { command = "nixpkgs-fmt" }
+
+[[language]]
+name = "zig"
+language-servers = [ "zls" ]
+auto-format = true
+
+[[language]]
+name = "rust"
+language-servers = [ "rust-analyzer" ]
+auto-format = true
+
+[[language]]
+name = "toml"
+language-servers = [ "taplo" ]
+auto-format = true
+
+[[language]]
+name = "nu"
+language-servers = [ "nu-lsp" ]
+auto-format = true

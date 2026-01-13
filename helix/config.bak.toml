@@ -1,31 +1,25 @@
 theme = "dracula"
 
 [keys.insert]
-j = { k = "normal_mode" }
+j={k="normal_mode"}
+
 
 [keys.normal.space]
 w = ":w"
 q = ":q!"
-p = ":primary-clipboard-paste-before"
 e = "file_explorer_in_current_buffer_directory"
 E = "file_explorer"
 "[" = ":config-reload"
 "]" = ":config-open"
-r = ":format"
-# ---- Tmux Splits ----
-t.j = ":sh tmux split-window -v -l 30%% -c \"#{pane_current_path}\""
-t.l = ":sh tmux split-window -h -c \"#{pane_current_path}\""
-# ---- Helix Viewport Commands (on 'space z') ----
-z.z = "align_view_center"
-
-# z.l = "scroll_horizontally_right"
-# z.h = "scroll_left"
-z.k = "scroll_up"
-z.j = "scroll_down"
-# ---- Custom Paste from Primary Clipboard (space p) ----
+t = { j = ":sh tmux split-window -v -l 30%% -c \"#{pane_current_path}\"", l = ":sh tmux split-window -h -c \"#{pane_current_path}\"" }
+r = "format"
 
 [keys.normal]
-# ---- Deletion & Manipulation ----
+"space.z.z" = "center_view"
+"space.z.l" = "scroll_right"
+"space.z.h" = "scroll_left"
+"space.z.k" = "scroll_up"
+"space.z.j" = "scroll_down"
 X = "delete_selection"
 d = "extend_line_below"
 D = "extend_to_line_bounds"
@@ -35,9 +29,7 @@ H = ["delete_selection", "move_char_left", "paste_before"]
 J = ["extend_to_line_bounds", "delete_selection", "paste_after"]
 K = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
 backspace = "delete_char_backward"
-# ret = ["insert_mode", "ret", "normal_mode"] # This line is commented out
-
-# ---- Tmux Control (using simple keys) ----
+# ret = ["insert_mode", "ret", "normal_mode"]
 g.k = ":sh tmux next-window"
 g.j = ":sh tmux previous-window"
 g.n = ":sh tmux new-window"
@@ -48,7 +40,7 @@ z.v = ":sh tmux split-window -v"
 z.h = ":sh tmux split-window -h"
 z.j = ":sh tmux select-pane -D"
 z.k = ":sh tmux select-pane -U"
-z.H = ":sh tmux select-pane -L"
+z.H = ":sh tmux select-pane -L"  # Capital H for left
 z.l = ":sh tmux select-pane -R"
 z.z = ":sh tmux select-pane -t :.+"
 
@@ -58,23 +50,23 @@ d = "extend_line_below"
 D = "extend_to_line_bounds"
 x = "delete_selection_noyank"
 L = ["delete_selection", "paste_after"]
-H = ["delete_selection", "move_char_left", "paste_before"]
+H = ["delete_selection","move_char_left", "paste_before"]
 J = ["extend_to_line_bounds", "delete_selection", "paste_after"]
 K = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
-esc = "normal_mode"
+esc="normal_mode"
 
 [editor]
 auto-info = false
-idle-timeout = 200
+idle-timeout = 200        
 cursorline = true
 line-number = "relative"
-completion-timeout = 100
+completion-timeout = 100  
 auto-format = false
 bufferline = "never"
 
 [editor.cursor-shape]
-insert = "bar"
-normal = "block"
+insert="bar"
+normal="block"
 
 [editor.lsp]
 display-messages = true
