@@ -10,6 +10,7 @@
     kanata
     git
     neovim
+    zellij
     tmux
     yazi
     alacritty

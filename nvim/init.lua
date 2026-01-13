@@ -143,7 +143,7 @@ vim.opt.breakindent = true
 vim.opt.linebreak = true
 vim.opt.cursorline = true
 vim.opt.showmode = false
-vim.opt.laststatus = 3
+vim.opt.laststatus = 0
 vim.opt.signcolumn = 'yes'
 vim.o.showtabline = 0
 vim.opt.redrawtime = 1500
@@ -247,3 +247,18 @@ vim.diagnostic.config({
   update_in_insert = false,
   severity_sort = true,
 })
+-- Force transparency to respect Foot terminal settings
+local function clear_bg()
+  local highlights = {
+    "Normal", "NormalNC", "SignColumn", "NormalFloat", "FloatBorder",
+    "StatusLine", "StatusLineNC", "EndOfBuffer", "LineNr", "CursorLineNr",
+    "Folded", "FoldColumn", "NvimTreeNormal"
+  }
+  for _, group in ipairs(highlights) do
+    vim.api.nvim_set_hl(0, group, { bg = "NONE", ctermbg = "NONE" })
+  end
+end
+
+-- Apply transparency immediately and on any colorscheme change
+clear_bg()
+vim.api.nvim_create_autocmd("ColorScheme", { callback = clear_bg })
