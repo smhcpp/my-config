@@ -79,11 +79,6 @@ in
     LC_TELEPHONE = "fr_FR.UTF-8";
     LC_TIME = "fr_FR.UTF-8";
   };
-  services.locate = {
-    enable = true;
-    package = pkgs.plocate; # Faster than mlocate
-    interval = "hourly"; # How often to update the database
-  };
   # --- Desktop (Niri) & Input ---
   programs.niri.enable = true;
   programs.xwayland.enable = true;

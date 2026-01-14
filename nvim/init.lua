@@ -13,10 +13,10 @@ end)
 
 vim.pack.add({
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
-  { src = 'https://github.com/rmagatti/auto-session' },
   { src = 'https://github.com/neovim/nvim-lspconfig' },
+  { src = 'https://github.com/rmagatti/auto-session' },
   { src = 'https://github.com/ibhagwan/fzf-lua' },
-  { src = 'https://github.com/vague2k/vague.nvim' },
+  { src = 'https://github.com/stevearc/conform.nvim' },
   { src = 'https://github.com/stevearc/oil.nvim' },
   { src = 'https://github.com/nvim-tree/nvim-web-devicons' },
   { src = 'https://github.com/supermaven-inc/supermaven-nvim' },
@@ -25,10 +25,34 @@ vim.pack.add({
   { src = 'https://github.com/hrsh7th/cmp-buffer' },
   { src = 'https://github.com/hrsh7th/cmp-path' },
   { src = 'https://github.com/L3MON4D3/LuaSnip' },
+  -- { src = 'https://github.com/vague2k/vague.nvim' },
+  { src = 'https://github.com/catppuccin/nvim',                name = 'catppuccin' },
+})
+require("catppuccin").setup({
+  flavour = "mocha",
+  transparent_background = true,
+  term_colors = true,
+  integrations = {
+    treesitter = true,
+    native_lsp = { enabled = true },
+    cmp = true,
+    fzf_lua = true,
+  },
+  custom_highlights = function(colors)
+    return {
+      ["@variable"] = { fg = colors.peach },
+      ["@variable.member"] = { fg = colors.teal },
+      ["@parameter"] = { fg = colors.maroon },
+      ["@function"] = { fg = colors.blue, style = { "bold" } },
+      ["@keyword"] = { fg = colors.mauve, style = { "italic" } },
+    }
+  end,
 })
 
-vim.filetype.add({ extension = { wgsl = "wgsl" } })
+vim.cmd.colorscheme("catppuccin")
+-- vim.cmd("colorscheme vague")
 
+vim.filetype.add({ extension = { wgsl = "wgsl" } })
 vim.lsp.config('zls', {
   cmd = { "zls" },
   root_markers = { "build.zig", ".git" },
@@ -60,6 +84,19 @@ vim.lsp.config('fish_lsp', {
   filetypes = { 'fish' },
   root_markers = { '.git' },
 })
+vim.lsp.config('vtsls', {
+  cmd = { "vtsls", "--stdio" },
+  filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+  root_markers = { "package.json", ".git" },
+})
+vim.lsp.enable('vtsls')
+require("conform").setup({
+  formatters_by_ft = {
+    javascript = { "prettier" },
+    typescript = { "prettier" },
+    json = { "prettier" },
+  },
+})
 
 vim.lsp.enable('fish_lsp')
 vim.lsp.enable('nixd')
@@ -72,7 +109,7 @@ require('nvim-treesitter.install').compilers = { "clang", "gcc" }
 local ok, ts = pcall(require, "nvim-treesitter.configs")
 if ok then
   ts.setup({
-    ensure_installed = { "rust", "glsl", "c", "zig", "lua", "wgsl", "vimdoc", "toml", "json" },
+    ensure_installed = { "javascript", "rust", "glsl", "c", "zig", "lua", "wgsl", "vimdoc", "toml", "json" },
     highlight        = { enable = true },
     indent           = { enable = true },
     sync_install     = true,
@@ -124,7 +161,6 @@ function H.statusline_path()
 end
 
 vim.opt.statusline = "%{v:lua.H.statusline_path()}%m %= %l:%c "
-vim.cmd("colorscheme vague")
 vim.opt.termguicolors = true
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -227,23 +263,23 @@ vim.keymap.set("n", "J", ":m .+1<CR>==")
 vim.keymap.set("n", "K", ":m .-2<CR>== ")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("n", "<leader>ll", vim.diagnostic.open_float)
+vim.keymap.set('n', '<leader>lh', vim.diagnostic.hide)
+vim.keymap.set('n', '<leader>ls', vim.diagnostic.show)
+
 vim.diagnostic.config({
   float = {
     focusable = true,
     close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
     border = 'rounded',
   },
-})
-vim.keymap.set('n', '<leader>h', vim.diagnostic.hide)
-vim.keymap.set('n', '<leader>s', vim.diagnostic.show)
-
-vim.diagnostic.config({
   virtual_text = true,
   signs = true,
   underline = true,
   update_in_insert = false,
   severity_sort = true,
 })
+
 -- Force transparency to respect Foot terminal settings
 local function clear_bg()
   local highlights = {
