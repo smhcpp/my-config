@@ -266,7 +266,13 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "<leader>ll", vim.diagnostic.open_float)
 vim.keymap.set('n', '<leader>lh', vim.diagnostic.hide)
 vim.keymap.set('n', '<leader>ls', vim.diagnostic.show)
-
+vim.keymap.set('n', 'sn', ':silent !tmux new-session -d && tmux switch-client -n<CR>')
+vim.keymap.set('n', 'sk', ':silent !tmux switch-client -n<CR>')
+vim.keymap.set('n', 'sj', ':silent !tmux switch-client -p<CR>')
+vim.keymap.set('n', 'ss', ':silent !tmux choose-tree -Zs<CR>')
+vim.keymap.set('n', 'gn', ':silent !tmux new-window<CR>')
+vim.keymap.set('n', 'gk', ':silent !tmux next-window<CR>')
+vim.keymap.set('n', 'gj', ':silent !tmux previous-window<CR>')
 vim.diagnostic.config({
   float = {
     focusable = true,

@@ -68,6 +68,11 @@ window-rule {
     geometry-corner-radius 12
     clip-to-geometry true
 }
+recent-windows {
+    binds {
+        Mod+O { next-window; }
+    }
+}
 binds {
     // XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
     // XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
@@ -87,7 +92,7 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+T hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    Mod+O repeat=false { toggle-overview; }
+    // Mod+O repeat=false { toggle-overview; }
     Mod+U { spawn "~/.config/niri/toggle-bar.fish"; }
     Mod+Q repeat=false { close-window; }
     Mod+H     { focus-column-left; }

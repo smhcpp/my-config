@@ -17,6 +17,7 @@
     gsettings-desktop-schemas
     glib
     foot
+    p7zip
     unzip
     wl-clipboard
     wireplumber
