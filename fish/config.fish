@@ -1,6 +1,6 @@
 set -x XCURSOR_THEME Bibata-Modern-Classic
 set -x XCURSOR_SIZE 24
-
+set -gx CARGO_NET_GIT_FETCH_WITH_CLI true
 # --- Aliases ---
 alias copy wl-copy
 alias paste wl-paste
@@ -15,13 +15,14 @@ alias wpaper '/home/mortimertz/.config/fish/set-wallpapers.fish'
 
 # --- Vi Mode & Key Bindings ---
 fish_vi_key_bindings
+bind -M default -e v
 # set -g fish_bind_mode default
 bind -M insert -m default jk repaint
 bind -M default ss 'tmux choose-tree -Zs'
 bind -M default sk 'tmux switch-client -n'
 bind -M default sj 'tmux switch-client -p'
 bind -M default sn 'tmux new-session -d; tmux switch-client -n'
-bind -M default xx 'tmux kill-session'
+# bind -M default xx 'tmux kill-session'
 bind -M default gn 'tmux new-window'
 bind -M default gk 'tmux next-window'
 bind -M default gj 'tmux previous-window'
