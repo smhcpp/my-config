@@ -1,5 +1,5 @@
 #!/usr/bin/env fish
-cp /etc/nixos/* ~/GitHub/my-config/nixos/
+cp -r /etc/nixos/* ~/GitHub/my-config/nixos/
 cp ~/.config/niri/* ~/GitHub/my-config/niri/
 cp ~/.config/foot/* ~/GitHub/my-config/foot/
 cp ~/.config/fish/config.fish ~/GitHub/my-config/fish/

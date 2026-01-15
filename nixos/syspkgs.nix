@@ -9,6 +9,8 @@
     bibata-cursors
     kanata
     git
+    telegram-desktop
+    discord
     neovim
     zellij
     tmux
