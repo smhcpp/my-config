@@ -6,11 +6,8 @@
     # --- Terminal & Shell Utilities ---
     libnotify
     mako
-    bibata-cursors
     kanata
     git
-    telegram-desktop
-    discord
     neovim
     zellij
     tmux
@@ -25,6 +22,10 @@
     wireplumber
     playerctl
     # --- Graphical Applications (Browsers) ---
+    zapzap
+    bibata-cursors
+    telegram-desktop
+    discord
     qutebrowser
     (vivaldi.override {
       proprietaryCodecs = true;
