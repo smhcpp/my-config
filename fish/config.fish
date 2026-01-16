@@ -40,3 +40,15 @@ if status is-interactive
         end
     end
 end
+function nxshell
+    nix-shell $argv
+end
+function exshell
+    if set -q IN_NIX_SHELL
+        echo "Exiting nix-shell..."
+        exit
+    else
+        echo "Not in nix-shell, staying in current shell"
+        return 1
+    end
+end

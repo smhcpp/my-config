@@ -219,6 +219,8 @@ vim.keymap.set("n", "<leader>zk", "<C-w>k")
 vim.keymap.set("n", "<leader>zl", "<C-w>l")
 vim.keymap.set("n", "<C-j>", "7jzz")
 vim.keymap.set("n", "<C-k>", "7kzz")
+vim.keymap.set("v", "<C-j>", "7jzz")
+vim.keymap.set("v", "<C-k>", "7kzz")
 vim.keymap.set("i", "<C-j>", "<Esc>10ji")
 vim.keymap.set("i", "<C-k>", "<Esc>10ki")
 vim.keymap.set("n", "<CR>", "i<CR><ESC>")
@@ -301,3 +303,24 @@ end
 -- Apply transparency immediately and on any colorscheme change
 clear_bg()
 vim.api.nvim_create_autocmd("ColorScheme", { callback = clear_bg })
+-- Set tmux window name to filename when opening a file
+vim.api.nvim_create_autocmd({"BufEnter", "BufReadPost"}, {
+  callback = function()
+    if vim.env.TMUX then
+      local filename = vim.fn.expand("%:t")
+      if filename ~= "" then
+        vim.fn.system("tmux rename-window '" .. filename .. "'")
+      end
+    end
+  end,
+})
+
+-- Restore folder name when exiting Neovim
+vim.api.nvim_create_autocmd("VimLeavePre", {
+  callback = function()
+    if vim.env.TMUX then
+      local folder = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+      vim.fn.system("tmux rename-window '" .. folder .. "'")
+    end
+  end,
+})
