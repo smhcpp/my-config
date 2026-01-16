@@ -186,6 +186,7 @@ vim.opt.updatetime = 250
 vim.opt.lazyredraw = true
 vim.opt.timeoutlen = 300
 vim.o.winborder = "rounded"
+vim.opt.virtualedit = "all"
 
 -- Keymaps
 vim.keymap.set("n", "<leader>w", ":w<CR>", { noremap = true, silent = true })
@@ -260,7 +261,10 @@ end)
 
 vim.keymap.set('n', '<leader>ff', "<cmd>FzfLua files<CR>")
 vim.keymap.set('n', '<leader>fg', "<cmd>FzfLua live_grep<CR>")
-vim.keymap.set('n', '<leader>go', "<cmd>FzfLua lsp_document_symbols<CR>")
+vim.keymap.set('n', 'go', "<cmd>FzfLua lsp_document_symbols<CR>")
+vim.keymap.set('n', 'gh', "^")
+vim.keymap.set('n', 'gs', "0")
+vim.keymap.set('n', 'gl', "$")
 vim.keymap.set("n", "J", ":m .+1<CR>==")
 vim.keymap.set("n", "K", ":m .-2<CR>== ")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -324,3 +328,17 @@ vim.api.nvim_create_autocmd("VimLeavePre", {
     end
   end,
 })
+
+-- Ending black hole memory of neovim
+vim.keymap.set({'n', 'v'}, 'y', '"+y', { noremap = true })
+vim.keymap.set('n', 'yy', '"+yy', { noremap = true })
+vim.keymap.set('n', 'Y', '"+Y', { noremap = true })
+vim.keymap.set({'n', 'v'}, 'x', '"+x', { noremap = true })
+vim.keymap.set({'n', 'v'}, 'd', '"_d', { noremap = true })
+vim.keymap.set({'n', 'v'}, 'dd', '"_dd', { noremap = true })
+vim.keymap.set({'n', 'v'}, 'D', '"_D', { noremap = true })
+vim.keymap.set({'n', 'v'}, 'c', '"_c', { noremap = true })
+vim.keymap.set({'n', 'v'}, 'cc', '"_cc', { noremap = true })
+vim.keymap.set({'n', 'v'}, 'C', '"_C', { noremap = true })
+vim.keymap.set({'n', 'v'}, 'p', '"+p', { noremap = true })
+vim.keymap.set({'n', 'v'}, 'P', '"+P', { noremap = true })

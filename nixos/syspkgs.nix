@@ -4,8 +4,8 @@
 {
   environment.systemPackages = with pkgs; [
     # --- Terminal & Shell Utilities ---
+    fzf
     libnotify
-    mako
     kanata
     git
     neovim
@@ -35,7 +35,6 @@
     (brave.override {
       commandLineArgs = "--ozone-platform-hint=auto --force-dark-mode";
     })
-
     # --- Productivity & Creative ---
     gimp
     obs-studio
@@ -43,8 +42,8 @@
     mpv
     kdePackages.okular
     loupe
-
     # --- Desktop Environment & Wayland (Niri/Waybar) ---
+    mako
     slurp
     grim
     xdg-utils
