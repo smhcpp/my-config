@@ -10,6 +10,7 @@
     git
     neovim
     zellij
+    jujutsu
     tree
     tmux
     yazi
@@ -17,7 +18,6 @@
     gsettings-desktop-schemas
     glib
     foot
-    lazygit
     ffmpegthumbnailer
     ffmpeg
     _7zz # Replaces/Augments p7zip

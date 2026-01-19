@@ -10,14 +10,14 @@
   fonts.packages = with pkgs; [
     noto-fonts-color-emoji
     nerd-fonts.symbols-only
-    nerd-fonts.jetbrains-mono  # "IntelliJ" default font
-    nerd-fonts.fira-code       # "Firacode"
-    nerd-fonts.mononoki        # "Monokai" style font
-    nerd-fonts.iosevka         # "Ioskova"
-    nerd-fonts.iosevka-term    # Terminal optimized version
+    nerd-fonts.jetbrains-mono # "IntelliJ" default font
+    nerd-fonts.fira-code # "Firacode"
+    nerd-fonts.mononoki # "Monokai" style font
+    nerd-fonts.iosevka # "Ioskova"
+    nerd-fonts.iosevka-term # Terminal optimized version
     nerd-fonts.hack
     nerd-fonts.ubuntu
-    nerd-fonts.meslo-lg        # Popular Apple-style font
+    nerd-fonts.meslo-lg # Popular Apple-style font
     nerd-fonts.comic-shanns-mono # Fun alternative
   ];
 
@@ -51,7 +51,6 @@
     XCURSOR_SIZE = "24";
     XDG_CURRENT_DESKTOP = "niri";
   };
-
   xdg.portal = {
     enable = true;
     extraPortals = [
@@ -59,8 +58,6 @@
     ];
     config.common = {
       default = "gtk";
-      "org.freedesktop.impl.portal.ScreenCast" = "gtk";
-      "org.freedesktop.impl.portal.Screenshot" = "gtk";
     };
   };
 }
