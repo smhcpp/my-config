@@ -11,4 +11,6 @@ cp ~/.config/waybar/* ~/GitHub/my-config/waybar/
 cp ~/.config/tmux/tmux.conf ~/GitHub/my-config/tmux/
 cp ~/backup-config.fish ~/GitHub/my-config/
 #cp ~/.config/helix/* ~/GitHub/my-config/helix/
-cp -r ~/.config/yazi/* ~/GitHub/my-config/yazi/
+cp  ~/.config/yazi/yazi.toml ~/GitHub/my-config/yazi/ 
+cp  ~/.config/yazi/theme.toml ~/GitHub/my-config/yazi/
+cp  ~/.config/yazi/keymap.toml ~/GitHub/my-config/yazi/

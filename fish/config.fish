@@ -19,6 +19,9 @@ if set -q GHOSTTY_BIN_DIR
 else if string match -q "foot*" "$TERM"
     source ~/.config/fish/conf.d/foot.fish
 end
+if command -v zoxide >/dev/null
+    zoxide init fish | source
+end
 function yz
     set tmp (mktemp -t "yazi-cwd.XXXXXX")
     command yazi $argv --cwd-file="$tmp"

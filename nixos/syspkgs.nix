@@ -77,6 +77,7 @@
     gcc
     taplo
     nodejs
+    vtsls
     nodePackages.prettier
     clang
     gnumake

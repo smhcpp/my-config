@@ -50,7 +50,7 @@ layout {
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 window-rule {
     draw-border-with-background false
-    geometry-corner-radius 4 
+    geometry-corner-radius 2 
     clip-to-geometry true
 }
 prefer-no-csd
@@ -65,7 +65,7 @@ window-rule {
 }
 // spawn-at-startup "swaybg -i /home/mortimertz/Photos/wallpapers/1.jpg"
 /-window-rule {
-    geometry-corner-radius 12
+    geometry-corner-radius 2
     clip-to-geometry true
 }
 recent-windows {
