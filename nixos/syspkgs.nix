@@ -10,12 +10,14 @@
     git
     neovim
     zellij
+    tree
     tmux
     yazi
     alacritty
     gsettings-desktop-schemas
     glib
     foot
+    lazygit
     p7zip
     unzip
     wl-clipboard
@@ -36,8 +38,8 @@
       commandLineArgs = "--ozone-platform-hint=auto --force-dark-mode";
     })
     # --- Productivity & Creative ---
+    ghostty
     gimp
-    obs-studio
     github-desktop
     mpv
     kdePackages.okular

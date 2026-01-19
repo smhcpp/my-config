@@ -8,6 +8,7 @@
     ./modules/networking.nix
     ./modules/input.nix
     ./modules/locale.nix
+    ./modules/media.nix
     ./users/mortimertz.nix
   ];
 

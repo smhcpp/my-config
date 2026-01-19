@@ -1,6 +1,5 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-
 vim.keymap.set("n", "<leader>o", function()
   vim.cmd("update")
   if vim.bo.filetype == "lua" then
@@ -17,7 +16,9 @@ vim.pack.add({
   { src = 'https://github.com/rmagatti/auto-session' },
   { src = 'https://github.com/ibhagwan/fzf-lua' },
   { src = 'https://github.com/stevearc/conform.nvim' },
-  { src = 'https://github.com/stevearc/oil.nvim' },
+  -- { src = 'https://github.com/stevearc/oil.nvim' },
+  { src = 'https://github.com/mikavilpas/yazi.nvim' }, -- Add this
+  { src = 'https://github.com/nvim-lua/plenary.nvim' },
   { src = 'https://github.com/nvim-tree/nvim-web-devicons' },
   { src = 'https://github.com/supermaven-inc/supermaven-nvim' },
   { src = 'https://github.com/hrsh7th/nvim-cmp' },
@@ -136,8 +137,6 @@ cmp.setup({
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<Esc>'] = cmp.mapping.abort(),
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    ['<Tab>'] = cmp.mapping.select_next_item(),
-    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
     ['<C-j>'] = cmp.mapping.select_next_item(), -- Add this
     ['<C-k>'] = cmp.mapping.select_prev_item(), -- Add this
   }),
@@ -148,7 +147,16 @@ cmp.setup({
 require('fzf-lua').setup({
   winopts = { height = 0.85, width = 0.80, border = 'rounded', preview = { layout = 'vertical', vertical = 'down:45%' } },
 })
-require("oil").setup({ keymaps = { ["q"] = "actions.close" }, view_options = { show_hidden = true, }, default_file_explorer = true, })
+-- require("oil").setup({ keymaps = { ["q"] = "actions.close" }, view_options = { show_hidden = true, }, default_file_explorer = true, })
+require("yazi").setup({
+  open_for_directories = true, -- Open yazi instead of netrw for directories
+  floating_window_prefs = {
+    border = "rounded",
+    relative = "editor",
+    width = 0.8,
+    height = 0.8,
+  },
+})
 
 local icons_ok, devicons = pcall(require, "nvim-web-devicons")
 if icons_ok then devicons.setup({ default = true }) end
@@ -195,11 +203,9 @@ vim.keymap.set("n", "<leader>r", function()
   vim.lsp.buf.format({ async = false })
 end, { noremap = true, silent = true })
 
-vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]])
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
+-- vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]])
+-- vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>q", ":q!<CR>")
-vim.keymap.set("n", "<leader>c", "gcc")
-vim.keymap.set("v", "<leader>c", "gc")
 vim.keymap.set("i", "jk", "<Esc>")
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 vim.keymap.set("t", "jk", "<C-\\><C-n>")
@@ -211,8 +217,8 @@ vim.keymap.set("n", "vb", "<C-v>")
 vim.keymap.set("n", "va", "ggVG")
 vim.keymap.set("n", "<leader>sj", ":split | wincmd j<CR>")
 vim.keymap.set("n", "<leader>sk", ":split | wincmd k<CR>")
-vim.keymap.set("n", "<leader>sl", ":vsplit | wincmd l<CR>")
 vim.keymap.set("n", "<leader>sh", ":vsplit | wincmd h<CR>")
+vim.keymap.set("n", "<leader>sl", ":vsplit | wincmd l<CR>")
 vim.keymap.set("n", "<leader>zz", "<C-w>w")
 vim.keymap.set("n", "<leader>zh", "<C-w>h")
 vim.keymap.set("n", "<leader>zj", "<C-w>j")
@@ -224,10 +230,10 @@ vim.keymap.set("v", "<C-j>", "7jzz")
 vim.keymap.set("v", "<C-k>", "7kzz")
 vim.keymap.set("i", "<C-j>", "<Esc>10ji")
 vim.keymap.set("i", "<C-k>", "<Esc>10ki")
+vim.keymap.set({ "n", "v" }, "<C-h>", "10h", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<C-l>", "10l", { noremap = true })
 vim.keymap.set("n", "<CR>", "i<CR><ESC>")
 vim.keymap.set("n", "<BS>", "i<BS><ESC>l")
-vim.keymap.set("n", "<TAB>", "10l")
-vim.keymap.set("n", "<S-TAB>", "10h")
 
 vim.keymap.set("n", "<leader>t", function()
   vim.cmd("lcd %:p:h")
@@ -250,14 +256,21 @@ vim.keymap.set('n', '<leader>/', function()
 end)
 
 vim.keymap.set("n", "<leader>e", function()
-  require("oil").open_float(nil, {
-    window = {
-      width = math.floor(vim.o.columns * 0.6),
-      height = math.floor(vim.o.lines * 0.6),
-      border = "rounded",
-    }
-  })
-end)
+  require("yazi").yazi()
+end, { desc = "Open yazi at the current file" })
+
+vim.keymap.set("n", "<leader>cw", function()
+  require("yazi").yazi(nil, vim.fn.getcwd())
+end, { desc = "Open yazi at the project root" })
+-- vim.keymap.set("n", "<leader>e", function()
+--   require("oil").open_float(nil, {
+--     window = {
+--       width = math.floor(vim.o.columns * 0.6),
+--       height = math.floor(vim.o.lines * 0.6),
+--       border = "rounded",
+--     }
+--   })
+-- end)
 
 vim.keymap.set('n', '<leader>ff', "<cmd>FzfLua files<CR>")
 vim.keymap.set('n', '<leader>fg', "<cmd>FzfLua live_grep<CR>")
@@ -265,10 +278,14 @@ vim.keymap.set('n', 'go', "<cmd>FzfLua lsp_document_symbols<CR>")
 vim.keymap.set('n', 'gh', "^")
 vim.keymap.set('n', 'gs', "0")
 vim.keymap.set('n', 'gl', "$")
-vim.keymap.set("n", "J", ":m .+1<CR>==")
 vim.keymap.set("n", "K", ":m .-2<CR>== ")
+vim.keymap.set("n", "J", ":m .+1<CR>==")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("n", "L", [["mx"mp]], { noremap = true, silent = true })
+vim.keymap.set("n", "H", [["mx"mh"mP]], { noremap = true, silent = true })
+--v im.keymap.set("v", "L", [["mxpgvl]], { noremap = true, silent = true })
+-- vim.keymap.set("v", "H", [["mxh"mpgv]], { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>ll", vim.diagnostic.open_float)
 vim.keymap.set('n', '<leader>lh', vim.diagnostic.hide)
 vim.keymap.set('n', '<leader>ls', vim.diagnostic.show)
@@ -308,7 +325,7 @@ end
 clear_bg()
 vim.api.nvim_create_autocmd("ColorScheme", { callback = clear_bg })
 -- Set tmux window name to filename when opening a file
-vim.api.nvim_create_autocmd({"BufEnter", "BufReadPost"}, {
+vim.api.nvim_create_autocmd({ "BufEnter", "BufReadPost" }, {
   callback = function()
     if vim.env.TMUX then
       local filename = vim.fn.expand("%:t")
@@ -330,15 +347,15 @@ vim.api.nvim_create_autocmd("VimLeavePre", {
 })
 
 -- Ending black hole memory of neovim
-vim.keymap.set({'n', 'v'}, 'y', '"+y', { noremap = true })
+vim.keymap.set({ 'n', 'v' }, 'y', '"+y', { noremap = true })
 vim.keymap.set('n', 'yy', '"+yy', { noremap = true })
 vim.keymap.set('n', 'Y', '"+Y', { noremap = true })
-vim.keymap.set({'n', 'v'}, 'x', '"+x', { noremap = true })
-vim.keymap.set({'n', 'v'}, 'd', '"_d', { noremap = true })
-vim.keymap.set({'n', 'v'}, 'dd', '"_dd', { noremap = true })
-vim.keymap.set({'n', 'v'}, 'D', '"_D', { noremap = true })
-vim.keymap.set({'n', 'v'}, 'c', '"_c', { noremap = true })
-vim.keymap.set({'n', 'v'}, 'cc', '"_cc', { noremap = true })
-vim.keymap.set({'n', 'v'}, 'C', '"_C', { noremap = true })
-vim.keymap.set({'n', 'v'}, 'p', '"+p', { noremap = true })
-vim.keymap.set({'n', 'v'}, 'P', '"+P', { noremap = true })
+vim.keymap.set({ 'n', 'v' }, 'x', '"+x', { noremap = true })
+vim.keymap.set({ 'n', 'v' }, 'd', '"_d', { noremap = true })
+vim.keymap.set({ 'n', 'v' }, 'dd', '"+dd', { noremap = true })
+vim.keymap.set({ 'n', 'v' }, 'D', '"_D', { noremap = true })
+vim.keymap.set({ 'n', 'v' }, 'c', '"_c', { noremap = true })
+vim.keymap.set({ 'n', 'v' }, 'cc', '"_cc', { noremap = true })
+vim.keymap.set({ 'n', 'v' }, 'C', '"_C', { noremap = true })
+vim.keymap.set({ 'n', 'v' }, 'p', '"+p', { noremap = true })
+vim.keymap.set({ 'n', 'v' }, 'P', '"+P', { noremap = true })
