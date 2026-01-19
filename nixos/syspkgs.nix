@@ -18,7 +18,16 @@
     glib
     foot
     lazygit
-    p7zip
+    ffmpegthumbnailer
+    ffmpeg
+    _7zz # Replaces/Augments p7zip
+    jq
+    poppler-utils # Important: use poppler_utils for Yazi
+    fd
+    ripgrep
+    zoxide
+    imagemagick
+    resvg
     unzip
     wl-clipboard
     wireplumber
@@ -38,7 +47,7 @@
       commandLineArgs = "--ozone-platform-hint=auto --force-dark-mode";
     })
     # --- Productivity & Creative ---
-    ghostty
+    wezterm
     gimp
     github-desktop
     mpv
@@ -67,6 +76,8 @@
     fish-lsp
     gcc
     taplo
+    nodejs
+    nodePackages.prettier
     clang
     gnumake
     pkg-config

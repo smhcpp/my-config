@@ -1,5 +1,7 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 vim.keymap.set("n", "<leader>o", function()
   vim.cmd("update")
   if vim.bo.filetype == "lua" then
@@ -90,15 +92,16 @@ vim.lsp.config('vtsls', {
   filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
   root_markers = { "package.json", ".git" },
 })
-vim.lsp.enable('vtsls')
 require("conform").setup({
   formatters_by_ft = {
-    javascript = { "prettier" },
-    typescript = { "prettier" },
+    -- javascript = { "prettier" },
+    -- typescript = { "prettier" },
     json = { "prettier" },
+    toml = { "taplo" },
   },
 })
-
+vim.lsp.enable('vtsls')
+vim.lsp.enable('taplo')
 vim.lsp.enable('fish_lsp')
 vim.lsp.enable('nixd')
 vim.lsp.enable('rust_analyzer')
@@ -110,7 +113,7 @@ require('nvim-treesitter.install').compilers = { "clang", "gcc" }
 local ok, ts = pcall(require, "nvim-treesitter.configs")
 if ok then
   ts.setup({
-    ensure_installed = { "javascript", "rust", "glsl", "c", "zig", "lua", "wgsl", "vimdoc", "toml", "json" },
+    ensure_installed = { "javascript", "rust", "glsl", "c", "zig", "lua", "wgsl", "vimdoc", "toml", "json", "typescript" },
     highlight        = { enable = true },
     indent           = { enable = true },
     sync_install     = true,
@@ -149,12 +152,20 @@ require('fzf-lua').setup({
 })
 -- require("oil").setup({ keymaps = { ["q"] = "actions.close" }, view_options = { show_hidden = true, }, default_file_explorer = true, })
 require("yazi").setup({
-  open_for_directories = true, -- Open yazi instead of netrw for directories
+  open_for_directories = true,
+  open_multiple_tabs = true, -- Add this
   floating_window_prefs = {
     border = "rounded",
     relative = "editor",
     width = 0.8,
     height = 0.8,
+  },
+  hooks = {
+    yazi_opened = function()
+      -- Disable netrw completely to avoid conflicts
+      vim.g.loaded_netrw = 1
+      vim.g.loaded_netrwPlugin = 1
+    end,
   },
 })
 

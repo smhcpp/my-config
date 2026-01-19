@@ -2,7 +2,7 @@
 "$schema" = "https://yazi-rs.github.io/schemas/theme.json"
 
 [flavor]
-dark = "synthwave84"
+use = "flexoki-dark"
 
-[mgr]
+[manager]
 show_icons = true

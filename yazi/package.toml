@@ -1,0 +1,12 @@
+[plugin]
+deps = []
+
+[[flavor.deps]]
+use = "gosxrgxx/flexoki-dark"
+rev = "28e1977"
+hash = "9dbbb64ea20f9f1271c31951dea55c7b"
+
+[[flavor.deps]]
+use = "Miuzarte/synthwave84"
+rev = "865bef9"
+hash = "a30e00a00c0d49e725ea572b1caf015f"
